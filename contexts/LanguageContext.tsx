@@ -2,7 +2,7 @@ import React, { createContext, useState, ReactNode, useEffect } from 'react';
 import type { Language } from '../types';
 
 interface Translations {
-  [key: string]: any;
+    [key: string]: any;
 }
 
 interface LanguageContextType {
@@ -29,14 +29,22 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
     useEffect(() => {
         const fetchTranslations = async () => {
             try {
-                // Use relative paths for fetching translations to ensure compatibility with GitHub Pages deployment.
+                // Fetch from public folder - these files will be available in production
                 const [fr, en] = await Promise.all([
-                    fetch('./locales/fr.json').then(res => res.json()),
-                    fetch('./locales/en.json').then(res => res.json())
+                    fetch('/locales/fr.json').then(res => {
+                        if (!res.ok) throw new Error(`Failed to fetch fr.json: ${res.status}`);
+                        return res.json();
+                    }),
+                    fetch('/locales/en.json').then(res => {
+                        if (!res.ok) throw new Error(`Failed to fetch en.json: ${res.status}`);
+                        return res.json();
+                    })
                 ]);
                 setTranslations({ fr, en });
             } catch (error) {
                 console.error("Failed to load translations:", error);
+                // Fallback: set empty translations to prevent infinite loading
+                setTranslations({ fr: {}, en: {} });
             }
         };
 
@@ -48,9 +56,9 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
         localStorage.setItem('language', lang);
     };
 
-    // Render children only when translations are loaded to avoid flickering or errors
+    // Show loading state while translations are being fetched
     if (!translations) {
-        return null;
+        return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
     }
 
     return (

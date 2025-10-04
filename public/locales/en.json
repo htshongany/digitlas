@@ -1,0 +1,77 @@
+{
+  "meta": {
+    "title": "Digitlas - Custom Websites & AI Agents",
+    "description": "Digitlas: Custom website creation and automation solutions with AI agents to boost your business. Performance, SEO, and modern design."
+  },
+  "nav": {
+    "home": "Home",
+    "services": "Our Services",
+    "portfolio": "Creations",
+    "contact": "Contact"
+  },
+  "home": {
+    "subheading": "Digitlas",
+    "heading": "The key to your digital presence.",
+    "cta": "Contact us",
+    "cta_aria": "Go to the contact section"
+  },
+  "services": {
+    "heading": "Our Services",
+    "subheading": "Tailor-made solutions to boost your business.",
+    "cards": [
+      {
+        "title": "Static & Showcase Websites",
+        "description": "Creation of ultra-fast, secure, and SEO-optimized websites to ensure an impeccable online presence."
+      },
+      {
+        "title": "Custom AI Agents",
+        "description": "Development of automation solutions and intelligent conversational agents to optimize your processes and customer relations."
+      },
+      {
+        "title": "Digital Strategy & SEO",
+        "description": "Analysis and optimization of your online visibility to attract more customers and stand out from the competition."
+      }
+    ]
+  },
+  "portfolio": {
+    "subheading": "Our creations",
+    "heading": "Exceptional projects.",
+    "projects": [
+      {
+        "image": "project-0.png",
+        "title": "Developer Portfolio",
+        "category": "Showcase Website",
+        "alt": "Portfolio application for a Python developer, showcasing a biography, certifications, and technical skills."
+      },
+      {
+        "image": "project-1.png",
+        "title": "AI HTML Builder",
+        "category": "AI Tool",
+        "alt": "AI HTML Builder application that generates HTML and Tailwind code from an image, showing a mockup and the corresponding code side-by-side."
+      },
+      {
+        "image": "project-2.png",
+        "title": "ModelProductFusion",
+        "category": "AI Image Generation",
+        "alt": "ModelProductFusion application that transforms a simple product photo into a studio-quality render with professional lighting."
+      },
+      {
+        "image": "project-3.png",
+        "title": "Image Styler",
+        "category": "AI Style Transfer",
+        "alt": "Image Styler application demonstrating a before-and-after transformation. The image is a realistic man's portrait, split in two to compare the original photo with its re-stylized version, which is also realistic, in an artistic drawing or manga style."
+      }
+    ]
+  },
+  "contact": {
+    "subheading": "Contact us",
+    "heading": "A project? An idea?",
+    "description": "Our team is available to discuss your digital project. Let's schedule a meeting to bring your ambitions to life and connect you with our partner developers.",
+    "cta_aria": "Contact us on WhatsApp at +243 893 082 000"
+  },
+  "header": {
+    "home_aria": "Back to home",
+    "open_menu_aria": "Open navigation menu",
+    "close_menu_aria": "Close navigation menu"
+  }
+}

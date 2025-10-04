@@ -1,0 +1,77 @@
+{
+  "meta": {
+    "title": "Digitlas - Sites & Agents IA sur Mesure",
+    "description": "Digitlas: Création de sites web sur mesure et solutions d'automatisation avec des agents IA pour propulser votre business. Performance, SEO, et design moderne."
+  },
+  "nav": {
+    "home": "Accueil",
+    "services": "Nos Services",
+    "portfolio": "Réalisations",
+    "contact": "Contact"
+  },
+  "home": {
+    "subheading": "Digitlas",
+    "heading": "La clé de votre présence digitale.",
+    "cta": "Contactez-nous",
+    "cta_aria": "Aller à la section contact"
+  },
+  "services": {
+    "heading": "Nos Services",
+    "subheading": "Des solutions sur mesure pour propulser votre business.",
+    "cards": [
+      {
+        "title": "Sites Statiques & Vitrines",
+        "description": "Création de sites web ultra-rapides, sécurisés et optimisés pour le référencement (SEO) afin de garantir une présence en ligne impeccable."
+      },
+      {
+        "title": "Agents IA Personnalisés",
+        "description": "Développement de solutions d'automatisation et d'agents conversationnels intelligents pour optimiser vos processus et votre relation client."
+      },
+      {
+        "title": "Stratégie Numérique & SEO",
+        "description": "Analyse et optimisation de votre visibilité en ligne pour attirer plus de clients et vous démarquer de la concurrence."
+      }
+    ]
+  },
+  "portfolio": {
+    "subheading": "Nos réalisations",
+    "heading": "Projets d'exception.",
+    "projects": [
+      {
+        "image": "project-0.png",
+        "title": "Portfolio Développeur",
+        "category": "Site Vitrine",
+        "alt": "Application de portfolio pour un développeur Python, présentant une biographie, des certifications et des compétences techniques."
+      },
+      {
+        "image": "project-1.png",
+        "title": "AI HTML Builder",
+        "category": "Outil IA",
+        "alt": "Application AI HTML Builder qui génère du code HTML et Tailwind à partir d'une image, montrant une maquette et le code correspondant côte à côte."
+      },
+      {
+        "image": "project-2.png",
+        "title": "ModelProductFusion",
+        "category": "Génération d'Images IA",
+        "alt": "Application ModelProductFusion qui transforme une photo de produit simple en un rendu de qualité studio avec un éclairage professionnel."
+      },
+      {
+        "image": "project-3.png",
+        "title": "Image Styler",
+        "category": "Style Transfert IA",
+        "alt": "Application Image Styler qui démontre une transformation avant/après. L'image est un portrait d'homme réaliste, scindé en deux pour comparer la photo originale avec sa version re-stylisée, également réaliste, dans un style de dessin artistique ou de manga."
+      }
+    ]
+  },
+  "contact": {
+    "subheading": "Contactez-nous",
+    "heading": "Un projet ? Une idée ?",
+    "description": "Notre équipe est à votre disposition pour discuter de votre projet digital. Prenons rendez-vous pour concrétiser vos ambitions et vous mettre en relation avec nos développeurs partenaires.",
+    "cta_aria": "Contactez-nous sur WhatsApp au +243 893 082 000"
+  },
+  "header": {
+    "home_aria": "Retour à l'accueil",
+    "open_menu_aria": "Ouvrir le menu de navigation",
+    "close_menu_aria": "Fermer le menu de navigation"
+  }
+}
