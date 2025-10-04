@@ -42,10 +42,12 @@ jobs:
       # Step 5: Build the application for production
       - name: Build project
         run: npm run build
-
+      
       # Step 6: Configure GitHub Pages for deployment
       - name: Setup Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       # Step 7: Upload the 'dist' folder as a build artifact
       - name: Upload artifact
