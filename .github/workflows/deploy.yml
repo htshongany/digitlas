@@ -1,0 +1,60 @@
+# Workflow name that will appear in GitHub's "Actions" tab
+name: Deploy to GitHub Pages
+
+# Trigger: this workflow runs on every push to the 'main' branch
+on:
+  push:
+    branches:
+      - main
+
+# Required permissions for the workflow to deploy to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Jobs to execute
+jobs:
+  build-and-deploy:
+    # Uses the latest Ubuntu version as the runtime environment
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Retrieve the code from your repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Configure Node.js environment (version 20)
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm' # Cache dependencies to speed up future builds
+
+      # Step 3: Install project dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Create CNAME file for custom domain
+      # Vite will automatically copy it to the 'dist' folder during build
+      - name: Create CNAME file
+        run: echo "digitlas.com" > public/CNAME
+
+      # Step 5: Build the application for production
+      - name: Build project
+        run: npm run build
+
+      # Step 6: Configure GitHub Pages for deployment
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # Step 7: Upload the 'dist' folder as a build artifact
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # The folder to upload (default 'dist' for Vite)
+          path: './dist'
+
+      # Step 8: Deploy the artifact to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
