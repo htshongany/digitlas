@@ -18,6 +18,10 @@ jobs:
   build-and-deploy:
     # Uses the latest Ubuntu version as the runtime environment
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     steps:
       # Step 1: Retrieve the code from your repository
       - name: Checkout repository
