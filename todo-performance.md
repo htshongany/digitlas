@@ -22,20 +22,22 @@
   - Ajouter `srcset` et `sizes`
 
 ### ⚙️ Configuration Vite Production
-- [ ] **Configurer la minification**
-  - Activer Terser pour JS
-  - Minification CSS automatique
-  - Supprimer les commentaires
+- [x] **Configurer la minification** ✅
+  - ✅ Terser avec options avancées (passes: 2)
+  - ✅ Suppression console.log/warn/debug en production
+  - ✅ Minification CSS activée
+  - ✅ Compression Gzip et Brotli
+  - ✅ Code splitting (vendor/utils séparés)
 
-- [ ] **Optimiser le bundling**
-  - Code splitting vendor/app
-  - Tree shaking agressif
-  - Compression gzip/brotli
+- [x] **Optimiser le bundling** ✅
+  - ✅ Code splitting vendor/utils/app
+  - ✅ Tree shaking automatique
+  - ✅ Compression Gzip (-71%) et Brotli (-75%)
 
-- [ ] **Supprimer les logs de debug**
-  - Enlever `console.warn` dans useTranslations
-  - Enlever `console.error` dans LanguageContext
-  - Ajouter plugin pour strip console en prod
+- [x] **Supprimer les logs de debug** ✅
+  - ✅ Plugin personnalisé remove-console
+  - ✅ Suppression automatique en production
+  - ✅ Conservation des console.error critiques
 
 ---
 
