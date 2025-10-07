@@ -69,8 +69,12 @@ export default defineConfig({
     },
     // Minification CSS avec options avancées
     cssMinify: 'esbuild',
-    // Configuration Rollup pour le code splitting
+    // Configuration Rollup avec tree shaking et code splitting
     rollupOptions: {
+      treeshake: {
+        preset: 'recommended',
+        moduleSideEffects: false,
+      },
       output: {
         // Code splitting manuel pour optimiser le cache
         manualChunks: (id) => {
