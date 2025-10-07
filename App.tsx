@@ -7,9 +7,7 @@ import Header from './components/Header';
 import MobileMenu from './components/MobileMenu';
 import SideIndicator from './components/SideIndicator';
 import HomeSection from './components/sections/HomeSection';
-import ServicesSection from './components/sections/ServicesSection';
-import PortfolioSection from './components/sections/PortfolioSection';
-import ContactSection from './components/sections/ContactSection';
+import LazySection from './components/LazySection';
 
 const sections: Section[] = [
     { id: 'home' },
@@ -131,10 +129,27 @@ const AppContent: React.FC = () => {
             <div className="relative w-full h-full flex">
                 <main className="w-full md:h-full overflow-y-auto p-6 pt-32 md:p-24 md:pt-28">
                     <div className="w-full max-w-5xl mx-auto">
-                        <HomeSection id="home" isActive={activeSection === 'home'} setActiveSection={handleSetActiveSection} ref={el => { sectionRefs.current.home = el; }} />
-                        <ServicesSection id="services" isActive={activeSection === 'services'} ref={el => { sectionRefs.current.services = el; }} />
-                        <PortfolioSection id="portfolio" isActive={activeSection === 'portfolio'} ref={el => { sectionRefs.current.portfolio = el; }} />
-                        <ContactSection id="contact" isActive={activeSection === 'contact'} ref={el => { sectionRefs.current.contact = el; }} />
+                        <HomeSection 
+                            id="home" 
+                            isActive={activeSection === 'home'} 
+                            setActiveSection={handleSetActiveSection} 
+                            ref={el => { sectionRefs.current.home = el; }} 
+                        />
+                        <LazySection 
+                            sectionId={'services' as SectionId}
+                            isActive={activeSection === 'services'} 
+                            sectionRefs={sectionRefs} 
+                        />
+                        <LazySection 
+                            sectionId={'portfolio' as SectionId}
+                            isActive={activeSection === 'portfolio'} 
+                            sectionRefs={sectionRefs} 
+                        />
+                        <LazySection 
+                            sectionId={'contact' as SectionId}
+                            isActive={activeSection === 'contact'} 
+                            sectionRefs={sectionRefs} 
+                        />
                     </div>
                 </main>
             </div>

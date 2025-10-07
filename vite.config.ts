@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import compression from 'vite-plugin-compression';
 import { removeConsole } from './vite-plugins/remove-console';
+import { inlineCriticalCSS } from './vite-plugins/inline-critical-css';
 
 export default defineConfig({
   base: '/', 
@@ -16,6 +17,7 @@ export default defineConfig({
     react(), 
     tailwindcss(), 
     removeConsole(),
+    inlineCriticalCSS(),
     // Compression Gzip
     compression({
       algorithm: 'gzip',
@@ -47,37 +49,57 @@ export default defineConfig({
         // Optimisations supplémentaires
         pure_funcs: ['console.log', 'console.warn'],
         passes: 2,
+        unsafe: true,
+        unsafe_comps: true,
+        unsafe_math: true,
+        // Supprimer le code mort
+        dead_code: true,
+        unused: true,
       },
       mangle: {
         // Préserver les noms de classe pour le debugging si nécessaire
         keep_classnames: false,
         keep_fnames: false,
+        safari10: true,
       },
       format: {
         // Supprimer les commentaires
         comments: false,
       },
     },
-    // Minification CSS
-    cssMinify: true,
+    // Minification CSS avec options avancées
+    cssMinify: 'esbuild',
     // Configuration Rollup pour le code splitting
     rollupOptions: {
       output: {
         // Code splitting manuel pour optimiser le cache
-        manualChunks: {
-          // Séparer les dépendances vendor
-          vendor: ['react', 'react-dom'],
-          // Séparer les hooks et utilitaires
-          utils: ['./hooks/useMediaQuery', './hooks/useTranslations', './hooks/useLazyLoading'],
+        manualChunks: (id) => {
+          // Vendor chunk pour les dépendances
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'vendor';
+            }
+            return 'vendor-libs';
+          }
+          // Utils chunk pour les hooks
+          if (id.includes('/hooks/') || id.includes('/contexts/')) {
+            return 'utils';
+          }
+          // Components chunk
+          if (id.includes('/components/')) {
+            return 'components';
+          }
         },
         // Noms de fichiers avec hash pour le cache busting
         chunkFileNames: 'assets/[name]-[hash].js',
         entryFileNames: 'assets/[name]-[hash].js',
         assetFileNames: 'assets/[name]-[hash].[ext]',
       },
+      // Optimisations externes
+      external: [],
     },
     // Optimiser la taille des chunks
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 500, // Plus strict
     // Sourcemaps pour le debugging (désactivé en prod pour la taille)
     sourcemap: false,
     // Optimisations supplémentaires
@@ -86,6 +108,8 @@ export default defineConfig({
     modulePreload: {
       polyfill: true,
     },
+    // Target moderne pour de meilleures optimisations
+    target: 'es2020',
   },
   // Optimisations des dépendances
   optimizeDeps: {
