@@ -10,9 +10,12 @@
   - `project-2.png` (130KB) → WebP (~40KB)
   - `project-3.png` (311KB) → WebP (~95KB)
 
-- [ ] **Implémenter lazy loading pour les images**
-  - Ajouter `loading="lazy"` aux images du portfolio
-  - Utiliser Intersection Observer pour les animations
+- [x] **Implémenter lazy loading pour les images** ✅
+  - ✅ Créé composant LazyImage avec Intersection Observer
+  - ✅ Hook useLazyLoading réutilisable
+  - ✅ Animation de chargement avec spinner
+  - ✅ Placeholder SVG optimisé
+  - ✅ Gestion d'erreur intégrée
 
 - [ ] **Créer des images responsive**
   - Générer plusieurs tailles (320w, 640w, 1024w)

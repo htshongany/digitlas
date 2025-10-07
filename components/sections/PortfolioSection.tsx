@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import type { SectionProps } from '../../types';
 import { useTranslations } from '../../hooks/useTranslations';
+import LazyImage from '../LazyImage';
 
 const PortfolioSection = forwardRef<HTMLDivElement, SectionProps>(({ id, isActive }, ref) => {
     const { t, ta } = useTranslations();
@@ -21,7 +22,7 @@ const PortfolioSection = forwardRef<HTMLDivElement, SectionProps>(({ id, isActiv
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {projects.map((project, index) => (
                     <figure key={project.title || index} className="group relative overflow-hidden rounded-lg shadow-lg">
-                        <img 
+                        <LazyImage 
                             src={project.image} 
                             alt={project.alt} 
                             className="aspect-video w-full h-full object-cover bg-gray-800 transition-transform duration-300 group-hover:scale-105" 
