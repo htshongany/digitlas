@@ -36,7 +36,7 @@ const Header: React.FC<HeaderProps> = ({ sections, activeSection, setActiveSecti
                                     key={id}
                                     onClick={() => setActiveSection(id)}
                                     className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-[#35e3e2] focus:outline-none whitespace-nowrap ${
-                                        activeSection === id ? 'bg-[#1d87af] text-white' : 'text-gray-300 hover:bg-white/10 hover:text-white'
+                                        activeSection === id ? 'bg-[#0f5f7a] text-white' : 'text-gray-300 hover:bg-white/10 hover:text-white'
                                     }`}
                                     aria-current={activeSection === id ? 'page' : undefined}
                                 >

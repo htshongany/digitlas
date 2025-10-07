@@ -22,7 +22,7 @@ const HomeSection = forwardRef<HTMLDivElement, SectionProps>(({ id, isActive, se
             </h1>
             <button
                 onClick={() => setActiveSection && setActiveSection('contact')}
-                className="mt-8 text-lg font-bold text-white bg-[#1d87af] hover:bg-[#1c6fa0] transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-[#35e3e2]/50 rounded-full px-8 py-3 self-start animate-intro-cta"
+                className="mt-8 text-lg font-bold text-white bg-[#0f5f7a] hover:bg-[#0d4d63] transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-[#35e3e2]/50 rounded-full px-8 py-3 self-start animate-intro-cta"
                 aria-label={t('home.cta_aria')}
             >
                 {t('home.cta')}

@@ -19,7 +19,7 @@ export const Logo: React.FC<LogoProps> = ({ className }) => {
             <defs>
                 <linearGradient id="logo-gradient-fill" x1="0%" y1="0%" x2="0%" y2="100%">
                     <stop offset="0%" stopColor="#35e3e2" />
-                    <stop offset="100%" stopColor="#1d87af" />
+                    <stop offset="100%" stopColor="#0f5f7a" />
                 </linearGradient>
             </defs>
             <g transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)" className="logo-solid" fill="currentColor">

@@ -15,7 +15,7 @@ const SideIndicator: React.FC<SideIndicatorProps> = ({ sections, activeSection }
                     {sections.map(({ id }) => (
                         <li key={id}>
                             <div className={`h-2 w-2 rounded-full transition-all ${
-                                activeSection === id ? 'bg-[#1d87af] scale-150' : 'bg-gray-600'
+                                activeSection === id ? 'bg-[#0f5f7a] scale-150' : 'bg-gray-600'
                             }`}></div>
                         </li>
                     ))}

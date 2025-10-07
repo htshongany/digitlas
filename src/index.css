@@ -38,7 +38,7 @@
     transition: background-size 400ms ease-in-out;
     background-repeat: no-repeat;
     background-size: 0% 100%; /* Change: Start with 0 width for left-to-right wipe */
-    background-image: linear-gradient(to right, #35e3e2, #1d87af); /* Change: Horizontal gradient */
+    background-image: linear-gradient(to right, #35e3e2, #0f5f7a); /* Change: Horizontal gradient */
     background-position: left; /* Change: Ensure animation starts from the left */
     background-clip: text;
     -webkit-background-clip: text;
