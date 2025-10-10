@@ -10,7 +10,7 @@ import SideIndicator from './components/SideIndicator';
 import HomeSection from './components/sections/HomeSection';
 import LazySection from './components/LazySection';
 import ErrorBoundary from './components/ErrorBoundary';
-import NotFound from './components/NotFound';
+
 
 const sections: Section[] = [
     { id: 'home' },
@@ -23,24 +23,10 @@ const AppContent: React.FC = () => {
     const isDesktop = useMediaQuery('(min-width: 768px)');
     const [activeSection, setActiveSection] = useState<SectionId>('home');
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [is404, setIs404] = useState(false);
     const { t, language } = useTranslations();
     
     // Hook pour gérer la navigation par ancres
     const { updateUrlHash } = useAnchorNavigation(setActiveSection, isDesktop);
-
-    // Vérifier si c'est une page 404
-    useEffect(() => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const is404Param = urlParams.get('404');
-        
-        if (is404Param) {
-            setIs404(true);
-            // Nettoyer l'URL sans recharger la page
-            const cleanUrl = window.location.origin + window.location.pathname;
-            window.history.replaceState({}, '', cleanUrl);
-        }
-    }, []);
 
     useEffect(() => {
         document.documentElement.lang = language;
@@ -132,11 +118,6 @@ const AppContent: React.FC = () => {
             }
         }
     };
-
-    // Si c'est une page 404, afficher le composant NotFound
-    if (is404) {
-        return <NotFound />;
-    }
 
     return (
         <>

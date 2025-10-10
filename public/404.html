@@ -11,7 +11,7 @@
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+            background: #111827;
             color: white;
             margin: 0;
             min-height: 100vh;
@@ -24,60 +24,295 @@
         .container {
             text-align: center;
             max-width: 600px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .error-code {
-            font-size: 6rem;
+            font-size: 8rem;
             font-weight: 900;
             background: linear-gradient(45deg, #35e3e2, #0f5f7a);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            margin-bottom: 1.5rem;
+        }
+
+        .heading {
+            font-size: 2.5rem;
+            font-weight: bold;
             margin-bottom: 1rem;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            background: #0f5f7a;
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            margin-top: 2rem;
-            transition: all 0.3s ease;
+        .message {
+            font-size: 1.25rem;
+            color: #d1d5db;
+            margin-bottom: 2rem;
+            line-height: 1.6;
         }
 
-        .btn:hover {
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            background: #0f5f7a;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
             background: #0d4d63;
             transform: translateY(-2px);
         }
-    </style>
 
-    <script>
-        // Redirection vers l'app React pour les SPA
-        // GitHub Pages redirige automatiquement les 404 vers ce fichier
-        setTimeout(() => {
-            const baseUrl = window.location.origin;
-            const originalPath = sessionStorage.getItem('404-path') || window.location.pathname;
+        .btn-secondary {
+            border: 2px solid #35e3e2;
+            color: #35e3e2;
+            padding: 10px 22px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
 
-            // Redirection vers l'app avec un paramètre pour indiquer que c'est une 404
-            if (originalPath !== '/404.html') {
-                window.location.replace(baseUrl + '/?404=' + encodeURIComponent(originalPath));
-            } else {
-                window.location.replace(baseUrl + '/?404=true');
+        .btn-secondary:hover {
+            background: #35e3e2;
+            color: #111827;
+        }
+
+        .countdown {
+            color: #9ca3af;
+            font-size: 1rem;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #35e3e2;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
             }
-        }, 100);
-    </script>
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
         <div class="error-code">404</div>
-        <h1>Page non trouvée</h1>
-        <p>Redirection en cours...</p>
-        <a href="/" class="btn">🏠 Retour à l'accueil</a>
+        <h1 class="heading" id="heading">Page non trouvée</h1>
+        <p class="message" id="message">
+            Désolé, la page que vous recherchez n'existe pas ou a été déplacée.
+            Retournez à l'accueil pour découvrir nos services.
+        </p>
+
+        <div class="buttons">
+            <a href="/" class="btn-primary" id="homeBtn">🏠 Retour à l'accueil</a>
+            <a href="/#contact" class="btn-secondary" id="contactBtn">📞 Nous contacter</a>
+        </div>
+
+        <div class="countdown">
+            <span class="loading"></span>
+            <span id="countdownText">Redirection automatique dans 10 secondes...</span>
+        </div>
     </div>
+
+    <script>
+        // Fonction pour lire la langue depuis IndexedDB
+        function getLanguageFromIndexedDB() {
+            return new Promise((resolve) => {
+                try {
+                    const request = indexedDB.open('digitlas-db', 1);
+
+                    request.onerror = () => resolve(null);
+
+                    request.onsuccess = (event) => {
+                        const db = event.target.result;
+
+                        // Essayer différents stores possibles
+                        const storeNames = ['settings', 'preferences', 'language', 'config'];
+
+                        for (const storeName of storeNames) {
+                            if (db.objectStoreNames.contains(storeName)) {
+                                const transaction = db.transaction([storeName], 'readonly');
+                                const store = transaction.objectStore(storeName);
+                                const getRequest = store.get('language');
+
+                                getRequest.onsuccess = () => {
+                                    const result = getRequest.result;
+                                    if (result && (result === 'fr' || result === 'en')) {
+                                        resolve(result);
+                                        return;
+                                    }
+                                    if (result && result.value && (result.value === 'fr' || result.value === 'en')) {
+                                        resolve(result.value);
+                                        return;
+                                    }
+                                };
+
+                                getRequest.onerror = () => resolve(null);
+                                break;
+                            }
+                        }
+
+                        // Si aucun store trouvé
+                        resolve(null);
+                    };
+                } catch (e) {
+                    resolve(null);
+                }
+            });
+        }
+
+        // Détection intelligente de la langue
+        async function detectLanguage() {
+            // 1. Vérifier le localStorage (méthode actuelle)
+            const storedLang = localStorage.getItem('language');
+            if (storedLang && (storedLang === 'fr' || storedLang === 'en')) {
+                console.log('Langue trouvée dans localStorage:', storedLang);
+                return storedLang;
+            }
+
+            // 2. Vérifier d'autres clés localStorage possibles
+            const altKeys = ['digitlas-language', 'lang', 'locale', 'i18n-language'];
+            for (const key of altKeys) {
+                const lang = localStorage.getItem(key);
+                if (lang && (lang === 'fr' || lang === 'en')) {
+                    console.log('Langue trouvée dans localStorage avec clé:', key, lang);
+                    return lang;
+                }
+            }
+
+            // 3. Vérifier sessionStorage
+            const sessionLang = sessionStorage.getItem('language');
+            if (sessionLang && (sessionLang === 'fr' || sessionLang === 'en')) {
+                console.log('Langue trouvée dans sessionStorage:', sessionLang);
+                return sessionLang;
+            }
+
+            // 4. Essayer de lire IndexedDB (si utilisé avant)
+            try {
+                const dbLang = await getLanguageFromIndexedDB();
+                if (dbLang) {
+                    console.log('Langue trouvée dans IndexedDB:', dbLang);
+                    return dbLang;
+                }
+            } catch (e) {
+                // IndexedDB pas disponible ou pas utilisé
+            }
+
+
+            // 5. Vérifier l'URL pour des indices de langue
+            const path = window.location.pathname.toLowerCase();
+            if (path.includes('/en/') || path.includes('-en') || path.includes('_en')) {
+                return 'en';
+            }
+            if (path.includes('/fr/') || path.includes('-fr') || path.includes('_fr')) {
+                return 'fr';
+            }
+
+            // 6. Vérifier les paramètres URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const langParam = urlParams.get('lang') || urlParams.get('language');
+            if (langParam && (langParam === 'fr' || langParam === 'en')) {
+                return langParam;
+            }
+
+            // 7. Vérifier la langue du navigateur
+            const browserLang = navigator.language || navigator.languages[0];
+            if (browserLang.startsWith('en')) return 'en';
+            if (browserLang.startsWith('fr')) return 'fr';
+
+            // 8. Défaut français (pour Digitlas)
+            return 'fr';
+        }
+
+        // Initialisation asynchrone
+        (async function initPage() {
+            const browserLang = await detectLanguage();
+
+            // Traductions
+            const translations = {
+                fr: {
+                    heading: 'Page non trouvée',
+                    message: 'Désolé, la page que vous recherchez n\'existe pas ou a été déplacée. Retournez à l\'accueil pour découvrir nos services.',
+                    homeBtn: '🏠 Retour à l\'accueil',
+                    contactBtn: '📞 Nous contacter',
+                    countdown: 'Redirection automatique dans {seconds} secondes...'
+                },
+                en: {
+                    heading: 'Page not found',
+                    message: 'Sorry, the page you are looking for does not exist or has been moved. Return to the homepage to discover our services.',
+                    homeBtn: '🏠 Back to home',
+                    contactBtn: '📞 Contact us',
+                    countdown: 'Automatic redirect in {seconds} seconds...'
+                }
+            };
+
+            // Appliquer les traductions
+            const t = translations[browserLang];
+            document.getElementById('heading').textContent = t.heading;
+            document.getElementById('message').textContent = t.message;
+            document.getElementById('homeBtn').textContent = t.homeBtn;
+            document.getElementById('contactBtn').textContent = t.contactBtn;
+            document.documentElement.lang = browserLang;
+            document.title = `${t.heading} - Digitlas`;
+
+            // Debug: afficher la langue détectée dans la console
+            console.log('404 Page - Langue détectée:', browserLang, 'Source:', localStorage.getItem('language') ? 'localStorage' : 'navigateur');
+
+            // Countdown et redirection
+            let countdown = 10;
+            const countdownElement = document.getElementById('countdownText');
+
+            const timer = setInterval(() => {
+                countdown--;
+                countdownElement.textContent = t.countdown.replace('{seconds}', countdown);
+
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    window.location.href = '/';
+                }
+            }, 1000);
+
+            // Analytics si disponible
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'page_view', {
+                    page_title: `404 - ${t.heading} (Static)`,
+                    page_location: window.location.href
+                });
+            }
+        })(); // Fin de la fonction async initPage
+    </script>
 </body>
 
 </html>
