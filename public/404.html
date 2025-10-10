@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page non trouvée - Digitlas</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+            color: white;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 600px;
+        }
+        
+        .error-code {
+            font-size: 6rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #35e3e2, #0f5f7a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #0f5f7a;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #0d4d63;
+            transform: translateY(-2px);
+        }
+    </style>
+    
+    <script>
+        // Redirection immédiate vers l'app React
+        // GitHub Pages redirige les 404 vers ce fichier
+        // On redirige vers l'app React qui gèrera l'affichage 404
+        const currentUrl = window.location.href;
+        const baseUrl = window.location.origin + window.location.pathname.replace('/404.html', '');
+        
+        // Redirection vers l'app avec un paramètre pour indiquer que c'est une 404
+        window.location.replace(baseUrl + '?404=' + encodeURIComponent(window.location.pathname));
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="error-code">404</div>
+        <h1>Page non trouvée</h1>
+        <p>Redirection en cours...</p>
+        <a href="/" class="btn">🏠 Retour à l'accueil</a>
+    </div>
+</body>
+</html>

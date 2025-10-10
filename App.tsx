@@ -168,21 +168,6 @@ const AppContent: React.FC = () => {
 };
 
 const App: React.FC = () => {
-    // Vérifier si l'URL correspond à une route invalide
-    const currentPath = window.location.pathname;
-    const validPaths = ['/', '/index.html'];
-    
-    // Si ce n'est pas une route valide, afficher 404
-    if (!validPaths.includes(currentPath) && currentPath !== '/') {
-        return (
-            <LanguageProvider>
-                <ErrorBoundary>
-                    <NotFound />
-                </ErrorBoundary>
-            </LanguageProvider>
-        );
-    }
-
     return (
         <LanguageProvider>
             <ErrorBoundary>
