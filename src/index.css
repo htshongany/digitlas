@@ -2,31 +2,61 @@
 
 /* Animation d'apparition du contenu */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.8s ease-out;
 }
 
 /* --- Custom Loading Animations --- */
 @keyframes scaleDownAndFadeIn {
-    from { opacity: 0; transform: scale(1.2); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(1.2);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
+
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .animate-intro-logo {
     animation: scaleDownAndFadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     transform-origin: left;
 }
+
 .animate-intro-heading {
     animation: fadeInUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards;
-    opacity: 0; /* Start hidden */
+    opacity: 0;
+    /* Start hidden */
 }
+
 .animate-intro-cta {
     animation: fadeInUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1s forwards;
-    opacity: 0; /* Start hidden */
+    opacity: 0;
+    /* Start hidden */
 }
 
 /* --- Custom Logo Hover --- */
@@ -34,33 +64,43 @@
 .header-logo-button .logo-gradient {
     transition: opacity 400ms ease-in-out;
 }
+
 .header-logo-button span {
     transition: background-size 400ms ease-in-out;
     background-repeat: no-repeat;
-    background-size: 0% 100%; /* Change: Start with 0 width for left-to-right wipe */
-    background-image: linear-gradient(to right, #35e3e2, #0f5f7a); /* Change: Horizontal gradient */
-    background-position: left; /* Change: Ensure animation starts from the left */
+    background-size: 0% 100%;
+    /* Change: Start with 0 width for left-to-right wipe */
+    background-image: linear-gradient(to right, #35e3e2, #0f5f7a);
+    /* Change: Horizontal gradient */
+    background-position: left;
+    /* Change: Ensure animation starts from the left */
     background-clip: text;
     -webkit-background-clip: text;
 }
+
 .header-logo-button:hover .logo-solid {
     opacity: 0;
 }
+
 .header-logo-button:hover .logo-gradient {
     opacity: 1;
 }
+
 .header-logo-button:hover span {
     color: transparent;
-    background-size: 100% 100%; /* Change: Animate to full width */
+    background-size: 100% 100%;
+    /* Change: Animate to full width */
 }
 
 /* Mobile-first: la marge est gérée par le conteneur principal */
 .content-section {
-   padding-bottom: 8rem; /* Espace entre les sections */
+    padding-bottom: 8rem;
+    /* Espace entre les sections */
 }
 
 .content-section:last-of-type {
-    padding-bottom: 4rem; /* Moins d'espace pour la dernière section */
+    padding-bottom: 4rem;
+    /* Moins d'espace pour la dernière section */
 }
 
 /* Desktop: on cache les sections par défaut... */
@@ -69,8 +109,10 @@
         padding-top: 0;
         padding-bottom: 0;
         display: none;
-        min-height: calc(100vh - 13rem); /* 7rem top padding + 6rem bottom padding from main */
+        min-height: calc(100vh - 13rem);
+        /* 7rem top padding + 6rem bottom padding from main */
     }
+
     /* ...et on affiche seulement la section active avec une animation. */
     .content-section.active {
         display: flex;
@@ -81,10 +123,15 @@
 }
 
 /* Cacher la scrollbar */
-body::-webkit-scrollbar, main::-webkit-scrollbar {
+body::-webkit-scrollbar,
+main::-webkit-scrollbar {
     display: none;
 }
-body, main {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+
+body,
+main {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }

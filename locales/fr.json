@@ -74,5 +74,23 @@
     "home_aria": "Retour à l'accueil",
     "open_menu_aria": "Ouvrir le menu de navigation",
     "close_menu_aria": "Fermer le menu de navigation"
+  },
+  "errors": {
+    "404": {
+      "title": "Page non trouvée",
+      "heading": "Page non trouvée",
+      "message": "Désolé, la page que vous recherchez n'existe pas ou a été déplacée. Retournez à l'accueil pour découvrir nos services.",
+      "home_button": "🏠 Retour à l'accueil",
+      "contact_button": "📞 Nous contacter",
+      "countdown": "Redirection automatique dans {seconds} secondes..."
+    },
+    "500": {
+      "title": "Erreur serveur",
+      "heading": "Oups ! Une erreur s'est produite",
+      "message": "Nous sommes désolés, quelque chose s'est mal passé. Notre équipe a été notifiée et travaille sur le problème.",
+      "reload_button": "🔄 Recharger la page",
+      "home_button": "🏠 Retour à l'accueil",
+      "details_title": "Détails de l'erreur (développement)"
+    }
   }
 }

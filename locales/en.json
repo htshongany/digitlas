@@ -74,5 +74,23 @@
     "home_aria": "Back to home",
     "open_menu_aria": "Open navigation menu",
     "close_menu_aria": "Close navigation menu"
+  },
+  "errors": {
+    "404": {
+      "title": "Page not found",
+      "heading": "Page not found",
+      "message": "Sorry, the page you are looking for does not exist or has been moved. Return to the homepage to discover our services.",
+      "home_button": "🏠 Back to home",
+      "contact_button": "📞 Contact us",
+      "countdown": "Automatic redirect in {seconds} seconds..."
+    },
+    "500": {
+      "title": "Server error",
+      "heading": "Oops! An error occurred",
+      "message": "We're sorry, something went wrong. Our team has been notified and is working on the issue.",
+      "reload_button": "🔄 Reload page",
+      "home_button": "🏠 Back to home",
+      "details_title": "Error details (development)"
+    }
   }
 }

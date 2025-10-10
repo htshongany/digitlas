@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import type { SectionId, Section } from './types';
 import { useMediaQuery } from './hooks/useMediaQuery';
+import { useAnchorNavigation } from './hooks/useAnchorNavigation';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { useTranslations } from './hooks/useTranslations';
 import Header from './components/Header';
@@ -8,6 +9,8 @@ import MobileMenu from './components/MobileMenu';
 import SideIndicator from './components/SideIndicator';
 import HomeSection from './components/sections/HomeSection';
 import LazySection from './components/LazySection';
+import ErrorBoundary from './components/ErrorBoundary';
+import NotFound from './components/NotFound';
 
 const sections: Section[] = [
     { id: 'home' },
@@ -21,6 +24,9 @@ const AppContent: React.FC = () => {
     const [activeSection, setActiveSection] = useState<SectionId>('home');
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
     const { t, language } = useTranslations();
+    
+    // Hook pour gérer la navigation par ancres
+    const { updateUrlHash } = useAnchorNavigation(setActiveSection, isDesktop);
 
     useEffect(() => {
         document.documentElement.lang = language;
@@ -93,6 +99,9 @@ const AppContent: React.FC = () => {
     }, [isDesktop, activeSection]);
     
     const handleSetActiveSection = (id: SectionId) => {
+        // Mettre à jour l'URL avec l'ancre
+        updateUrlHash(id);
+        
         if(isDesktop) {
             setActiveSection(id);
         } else {
@@ -159,9 +168,26 @@ const AppContent: React.FC = () => {
 };
 
 const App: React.FC = () => {
+    // Vérifier si l'URL correspond à une route invalide
+    const currentPath = window.location.pathname;
+    const validPaths = ['/', '/index.html'];
+    
+    // Si ce n'est pas une route valide, afficher 404
+    if (!validPaths.includes(currentPath) && currentPath !== '/') {
+        return (
+            <LanguageProvider>
+                <ErrorBoundary>
+                    <NotFound />
+                </ErrorBoundary>
+            </LanguageProvider>
+        );
+    }
+
     return (
         <LanguageProvider>
-            <AppContent />
+            <ErrorBoundary>
+                <AppContent />
+            </ErrorBoundary>
         </LanguageProvider>
     );
 };
